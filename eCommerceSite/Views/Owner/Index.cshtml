@@ -1,0 +1,74 @@
+﻿@model IEnumerable<eCommerceSite.Models.Cetagory.Cetagory>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/OwnerLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Photo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Details)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="~/CetagoryPicture/@Html.DisplayFor(modelItem => item.Photo)" height="100" width="100" />
+                            </td>
+                            <td>
+                                @if ((item.Title).ToString().Length > 30)
+                                {
+                                    @item.Title.ToString().Substring(0, 30); <h6> ...... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Title);
+                                }
+
+                            </td>
+                            <td>
+                                @if ((item.Details).ToString().Length > 500)
+                                {
+
+                                    @item.Details.ToString().Substring(0, 500); <h6> ..... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Details);
+                                }
+
+
+                            </td>
+                            <td>
+                                <a asp-action="Post" asp-route-id="@item.CID"> Post </a> 
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

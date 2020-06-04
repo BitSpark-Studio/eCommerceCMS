@@ -1,0 +1,107 @@
+﻿@model eCommerceSite.Models.Cetagory.UpdateCetagory
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/AdminOperation.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Cetagory</h4>
+<hr />
+
+
+<form enctype="multipart/form-data" asp-action="Cetagory_Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+        <label asp-for="Update_Photo" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input asp-for="Update_Photo" id="imgInp" value="~/CetagoryPicture/@Model.Photo" class="form-control custom-file-input"  accept="image/*" />
+                <label class="custom-file-label"> Choose File.... </label>
+            </div>
+            <img id="Image" src="~/CetagoryPicture/@Model.Photo" height="100" width="100" alt="your image" />
+            <span asp-validation-for="Update_Photo" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Title" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Details" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <textarea asp-for="Details" class="form-control">  </textarea>
+            <span asp-validation-for="Details" class="text-danger"></span>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="CID" />
+    <input type="hidden" asp-for="Photo" />
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+        window.onload = function () {
+            swal({
+                icon: 'success',
+                title: 'Cetagory Updated!',
+                text: 'কেটাগরি আপডেট সম্পাদন হয়েছে',
+            })
+        };
+    </script>
+
+}
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileName);
+            });
+
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+
+    </script>
+
+}
