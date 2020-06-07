@@ -1,0 +1,55 @@
+﻿@model eCommerceSite.Models.Advertisement.Posted_Advertisement_View_Model
+@{
+    ViewData["Title"] = "Details_Non_Approve_Post";
+    Layout = "~/Views/Shared/OwnerOperation.cshtml";
+}
+
+<h1>Details_Non_Approve_Post</h1>
+
+<div>
+    <h4>@Model.Product_Title</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            Product Imagaes
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/Product/@Model.Product_Image_1" height="100" width="100"> &nbsp;&nbsp; <img src="~/Product/@Model.Product_Image_2" height="100" width="100"> &nbsp;&nbsp; <img src="~/Product/@Model.Product_Image_3" height="100" width="100">  <br /> <br />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product_Description) 
+        </dt>
+        
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product_Description) <br /> <br />
+        </dd>
+
+        <dt class="col-sm-2">
+            Cetagory
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cetagory_Title) <br /> <br />
+        </dd>
+
+        <dt class="col-sm-2">
+            Cetagory Details
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Cetagory_Description <br /> <br />
+        </dd>
+
+        <dt class="col-sm-2">
+            Cetagory Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/CetagoryPicture/@Model.Cetagory_Image" height="100" width="100" />
+            @*<img src="~/CetagoryPicture/@Html.DisplayFor(model => model.Photo)" height="100" width="100" />*@
+        </dd>
+
+    </dl>
+</div>
+@*<div>
+    <a asp-action="Cetagory_Edit" asp-route-id="@Model.CID">Edit</a> |
+  
+</div>*@
