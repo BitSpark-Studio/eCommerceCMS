@@ -6,4 +6,13 @@ Restful API. And Handled AJax and Jquery for 'GET,POST,PUT,DELETE' request in AP
 
 # Entity Relationship Diagram
 
+![](ERD.png)
+
 # Screen Shoots of Projects
+![](1.png)
+![](2.png)
+![](3.png)
+![](4.png)
+![](5.png)
+![](6.png)
+![](7.png)
