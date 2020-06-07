@@ -3,9 +3,15 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/OwnerLayout.cshtml";
+
+
 }
 
 <h1>Index</h1>
+
+@{
+    var data = Model.ToList();
+}
 
 <div class="card mb-4">
     <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
@@ -16,59 +22,159 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Photo)
+                            .
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Title)
+                           .
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Details)
+                          .
                         </th>
-                        <th>
-                            Actions
-                        </th>
+
                     </tr>
+
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @for (int i = 0; i < data.Count; i++)
                     {
-                        <tr>
-                            <td>
-                                <img src="~/CetagoryPicture/@Html.DisplayFor(modelItem => item.Photo)" height="100" width="100" />
-                            </td>
-                            <td>
-                                @if ((item.Title).ToString().Length > 30)
-                                {
-                                    @item.Title.ToString().Substring(0, 30); <h6> ...... </h6>
+                    <tr>
 
+
+                        <td>
+                            <img src="~/CetagoryPicture/@Html.DisplayFor(modelItem => data[i].Photo)" height="250" width="250" />
+                            <div class="tile-footer" style="max-height:45px;">
+                                @if ((data[i].Title).ToString().Length > 30)
+                                {
+                                    <h6> @data[i].Title.ToString().Substring(0, 30) ..... </h6>
                                 }
                                 else
                                 {
-                                    @Html.DisplayFor(modelItem => item.Title);
+                                    <h6> @data[i].Title.ToString().Substring(0) </h6>
                                 }
 
-                            </td>
-                            <td>
-                                @if ((item.Details).ToString().Length > 500)
+                                <a asp-action="Post" asp-route-id="@data[i].CID">
+                                    <abbr title="Post Advertisement / আপনার বিজ্ঞাপন দিন">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fa fa-eject">
+                                    </abbr>
+                                </a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a asp-action="Details" asp-route-id="@data[i].CID">
+                                    <abbr title="Details">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fas fa-align-justify">
+                                    </abbr>
+                                </a>
+                            </div>
+                        </td>
+
+                        @try
+                        {
+                            if (data[i + 1] == null)
+                            {
+                                <td> </td>
+                                <td> </td>
+                                break;
+
+
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            <td> </td>
+                            <td> </td>
+                            break;
+                        }
+
+                        <td>
+                            @*<div class="tile-image" style="background-image: url('/CetagoryPicture/@data[i].Photo')">
+
+                            </div>*@
+
+                            <img src="~/CetagoryPicture/@Html.DisplayFor(modelItem => data[i].Photo)" height="250" width="250" />
+                            <div class="tile-footer" style="max-height:45px;">
+                                @if ((data[i].Title).ToString().Length > 30)
                                 {
-
-                                    @item.Details.ToString().Substring(0, 500); <h6> ..... </h6>
-
+                                    <h6> @data[i].Title.ToString().Substring(0, 30) ..... </h6>
                                 }
                                 else
                                 {
-                                    @Html.DisplayFor(modelItem => item.Details);
+                                    <h6> @data[i].Title.ToString().Substring(0) </h6>
                                 }
 
+                                <a asp-action="Post" asp-route-id="@data[i].CID">
+                                    <abbr title="Post Advertisement / আপনার বিজ্ঞাপন দিন">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fa fa-eject">
+                                    </abbr>
+                                </a>
+                                &nbsp;&nbsp;&nbsp;
+                                <a asp-action="Details" asp-route-id="@data[i].CID">
+                                    <abbr title="Details">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fas fa-align-justify">
+                                    </abbr>
+                                </a>
+                            </div>
+                        </td>
 
-                            </td>
-                            <td>
-                                <a asp-action="Post" asp-route-id="@item.CID"> Post </a> 
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                        @try
+                        {
+
+                            if (data[i + 1] == null)
+                            {
+                                <td> </td>
+                                break;
+
+                            }
+                            else
+                            {
+                                i++;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            <td> </td>
+                            break;
+                        }
+
+                        <td>
+                            @*<div class="tile-image" style="background-image: url('/CetagoryPicture/@data[i].Photo')">
+
+                            </div>*@
+
+                            <img src="~/CetagoryPicture/@Html.DisplayFor(modelItem => data[i].Photo)" height="250" width="250" />
+                            <div class="tile-footer" style="max-height:45px;">
+                                @if ((data[i].Title).ToString().Length > 30)
+                                {
+                                    <h6> @data[i].Title.ToString().Substring(0, 30) ..... </h6>
+                                }
+                                else
+                                {
+                                    <h6> @data[i].Title.ToString().Substring(0) </h6>
+                                }
+
+                                <a asp-action="Post" asp-route-id="@data[i].CID">
+                                    <abbr title="Post Advertisement / আপনার বিজ্ঞাপন দিন">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fa fa-eject">
+                                    </abbr>
+                                </a>
+
+                                &nbsp;&nbsp;&nbsp;
+                                <a asp-action="Details" asp-route-id="@data[i].CID">
+                                    <abbr title="Details">
+                                        <img src="https://cl.ly/233R2d0p2o0t/icon_download.svg" alt="" class="fas fa-align-justify">
+                                    </abbr>
+                                </a>
+
+                            </div>
+                        </td>
+
+
+                    </tr>
+                        }
+                    </tbody>
+                    </table>
+                </div>
     </div>
 </div>

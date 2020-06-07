@@ -15,6 +15,10 @@ namespace eCommerceSite.Models.Post
         [Key]
         public int PID { set; get; }
 
+        public String Cetagory_Title { set; get; }
+
+        public String Cetagory_Image { set; get; }
+
         [ForeignKey("Cetagory")]
         public int CID { set; get; }
         public Cetagory.Cetagory cetagory { set; get; }

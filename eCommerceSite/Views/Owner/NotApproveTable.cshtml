@@ -1,0 +1,79 @@
+﻿@model IEnumerable<eCommerceSite.Models.Owner.Posted_Advertisement_Details_ViewModel>
+@{
+    ViewData["Title"] = "NotApproveTable";
+    Layout = "~/Views/Shared/OwnerLayout.cshtml";
+}
+
+<h1>Not Approve List</h1>
+
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Product_Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cetagory_Name)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                           
+                            <td>
+                                @if ((item.Product_Title).ToString().Length > 30)
+                                {
+                                    @item.Product_Title.ToString().Substring(0, 30); <h6> ...... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Product_Title);
+                                }
+
+                            </td>
+                            <td>
+                                @if ((item.Product_Description).ToString().Length > 500)
+                                {
+                                    @item.Product_Description.ToString().Substring(0, 500); <h6> ...... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Product_Description);
+                                }
+                            </td>
+
+                            <td>
+                                <img src="~/CetagoryPicture/@item.Cetagory_Image" height="100" width="100">
+                                @Html.DisplayFor(modelItem => item.Cetagory_Name)
+                            </td>
+
+                            <td>
+                                <a  href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID" > More Details</a> |
+                                <a  href="~/Advertisement/Edit_Non_Approve_Post/@item.CID/@item.PID" > Edit</a> |
+                                <a  href="~/Advertisement/Delete_Non_Approve_Post/@item.CID/@item.PID"> Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

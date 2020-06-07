@@ -27,6 +27,10 @@ namespace eCommerceSite.Models.Joining
         [ForeignKey("Cetagory")]
         public int CID { set; get; }
 
+        [MaxLength(4)]
+        [Column(TypeName = "varchar(4)")]
+        public String Approve { set; get; }
+
         public Cetagory.Cetagory Cetagory { set; get; }
 
     }

@@ -1,0 +1,16 @@
+﻿.tile-footer {
+    position: relative;
+    background-color: white;
+    box-sizing: content-box;
+    padding: 30px;
+}
+.tile-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-top: 66.64%;
+
+}
+
+
