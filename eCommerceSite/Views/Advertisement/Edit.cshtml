@@ -1,0 +1,58 @@
+﻿@model eCommerceSite.Models.Post.Edit_Post_View_Model
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/OwnerOperation.cshtml";
+
+}
+
+<h1>Edit</h1>
+
+<h4>Post</h4>
+<hr />
+
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="PID" />
+    <div class="form-group">
+        <label asp-for="Title" class="control-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Details" class="control-label"></label>
+        <textarea asp-for="Details" class="form-control">  </textarea>
+        <span asp-validation-for="Details" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save Changes" class="btn btn-primary" />
+    </div>
+</form>
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+
+        window.onload = function () {
+            swal({
+                icon: 'success',
+                title: 'Update Done!',
+                text: 'আপডেট সম্পাদন হয়েছে',
+            })
+        };
+    </script>
+
+}
+
+
+<div>
+    <a asp-controller="Owner" asp-action="NotApproveTable">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+}

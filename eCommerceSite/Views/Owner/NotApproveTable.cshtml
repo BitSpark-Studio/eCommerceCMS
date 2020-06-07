@@ -39,16 +39,16 @@
                         <td>
                             @if ((item.Product_Title).ToString().Length > 30)
                             {
-                                <a href="" data-toggle="modal" data-target="#exampleModalCenter">
-                                    @item.Product_Title.ToString().Substring(0, 30); <h6> ...... </h6>
-                                </a>
+                                @*<a href="" data-toggle="modal" data-target="#exampleModalCenter">*@
+                                    @item.Product_Title.ToString().Substring(0, 30) <h6> ...... </h6>
+                                @*</a>*@
 
                             }
                             else
                             {
-                                <a data-toggle="modal" data-target="#exampleModalCenter">
-                                    @Html.DisplayFor(modelItem => item.Product_Title);
-                                </a>
+                                @*<a data-toggle="modal" data-target="#exampleModalCenter">*@
+                                    @Html.DisplayFor(modelItem => item.Product_Title)
+                                @*</a>*@
                             }
 
                         </td>
@@ -71,7 +71,7 @@
 
                         <td>
                             <a href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID"> More Details</a> |
-                            <a href="~/Advertisement/Edit_Non_Approve_Post/@item.CID/@item.PID"> Edit</a> |
+                            <a href="~/Advertisement/Edit/@item.PID">Edit</a> |
                             <a href="~/Advertisement/Delete_Non_Approve_Post/@item.CID/@item.PID"> Delete</a>
                         </td>
                     </tr>
@@ -88,7 +88,7 @@
 </button>*@
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+@*<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -98,7 +98,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @*Javascript here*@
+                Javascript here
 
             </div>
             <div class="modal-footer">
@@ -107,4 +107,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

@@ -29,7 +29,6 @@ namespace eCommerceSite.Controllers.Advertisement
             return View();
         }
 
-        
         [Route("Advertisement/Details_Advertisement/{CID}/{PID}")]
         public async Task<ActionResult> Details_Non_Approve_Post(int CID , int PID)
         {
@@ -70,73 +69,51 @@ namespace eCommerceSite.Controllers.Advertisement
             return View(Non_Approve_Model);
         }
 
-        // GET: Advertisement/Create
-        public ActionResult Create()
+        [Route("Advertisement/Edit/{PID}")]
+        public async Task<ActionResult> Edit(int PID)
         {
-            return View();
-        }
-
-        // POST: Advertisement/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            var data = await _context.Post.Where(x => x.PID == PID)
+                .FirstOrDefaultAsync<Post>();
+            if (data == null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                return BadRequest();
             }
-            catch
+            var post = new Edit_Post_View_Model()
             {
-                return View();
-            }
-        }
+                PID = data.PID,
+                Title = data.Title,
+                Details = data.Details,
+            };
 
-        // GET: Advertisement/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return View(post);
         }
 
         // POST: Advertisement/Edit/5
+        [Route("Advertisement/Edit/{PID}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(int PID, Edit_Post_View_Model post)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var data = await _context.Post.Where(x => x.PID == PID)
+                .FirstOrDefaultAsync<Post>();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (data == null)
             {
-                return View();
+                return BadRequest();
             }
-        }
 
-        // GET: Advertisement/Delete/5
-        public ActionResult Delete(int id)
-        {
+            data.Title = post.Title;
+            data.Details = post.Details;
+
+            await _context.SaveChangesAsync();
+
+            ViewBag.Message = "Update Done!";
+
             return View();
+
         }
 
-        // POST: Advertisement/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+      
+       
     }
 }

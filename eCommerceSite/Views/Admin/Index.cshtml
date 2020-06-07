@@ -55,10 +55,10 @@
 
                             </td>
                             <td>
-                                @if ((item.Details).ToString().Length > 50)
+                                @if ((item.Details).ToString().Length > 500)
                                 {
 
-                                    @item.Details.ToString().Substring(0, 50); <h6> ..... </h6>
+                                    @item.Details.ToString().Substring(0, 500); <h6> ..... </h6>
                                    
                                 }
                                 else
