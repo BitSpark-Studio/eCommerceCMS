@@ -1,8 +1,97 @@
-﻿@{
+﻿@model IEnumerable<eCommerceSite.Models.Cetagory.HomeCategoryViewModel>
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
+    var data = Model.ToList();
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!--? slider Area Start -->
+<div class="slider-area ">
+    <div class="slider-active">
+        <!-- Single Slider -->
+        <div class="single-slider slider-height d-flex align-items-center slide-bg">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Select Your New Perfect Style</h1>
+                            <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat is aute irure.</p>
+                            <!-- Hero-btn -->
+                            <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
+                                <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
+                        <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                            <img src="assets/img/hero/watch.png" alt="" class=" heartbeat">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Single Slider -->
+        <div class="single-slider slider-height d-flex align-items-center slide-bg">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                        <div class="hero__caption">
+                            <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Select Your New Perfect Style</h1>
+                            <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat is aute irure.</p>
+                            <!-- Hero-btn -->
+                            <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
+                                <a href="industries.html" class="btn hero-btn">Shop Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
+                        <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                            <img src="assets/img/hero/watch.png" alt="" class=" heartbeat">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- slider Area End-->
+
+<section class="new-product-area section-padding30">
+    <div class="container">
+        <!-- Section tittle -->
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="section-tittle mb-70">
+                    <h2>Category</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @if (data.Count == 0)
+            {
+                <div class="row">
+                    NO DATA
+                </div>
+            }
+            else
+            {
+                for (int i = 0; i <data.Count; i++)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-new-pro mb-30 text-center">
+                            <div class="product-img">
+                                <img src="~/CetagoryPicture/@data[i].Category_Image" alt="">
+                            </div>
+                            <div class="product-caption">
+                                <h3><a href="product_details.html">@data[i].Category_Title</a></h3>
+                                @*<span>$ 45,743</span>*@
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </div>
+</section>

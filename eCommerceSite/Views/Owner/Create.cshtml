@@ -2,8 +2,10 @@
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_ShopLayout.cshtml";
 }
 
+<div class="container">
 <h1>Create</h1>
 
 <h4>Owner Registration</h4>
@@ -79,6 +81,7 @@
         </div>
     </div>
 </form>
+</div>
 
 @if (ViewBag.Message != null)
 {

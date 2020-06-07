@@ -34,46 +34,77 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
-                           
-                            <td>
-                                @if ((item.Product_Title).ToString().Length > 30)
-                                {
+                    <tr>
+
+                        <td>
+                            @if ((item.Product_Title).ToString().Length > 30)
+                            {
+                                <a href="" data-toggle="modal" data-target="#exampleModalCenter">
                                     @item.Product_Title.ToString().Substring(0, 30); <h6> ...... </h6>
+                                </a>
 
-                                }
-                                else
-                                {
+                            }
+                            else
+                            {
+                                <a data-toggle="modal" data-target="#exampleModalCenter">
                                     @Html.DisplayFor(modelItem => item.Product_Title);
-                                }
+                                </a>
+                            }
 
-                            </td>
-                            <td>
-                                @if ((item.Product_Description).ToString().Length > 500)
-                                {
-                                    @item.Product_Description.ToString().Substring(0, 500); <h6> ...... </h6>
+                        </td>
+                        <td>
+                            @if ((item.Product_Description).ToString().Length > 500)
+                            {
+                                @item.Product_Description.ToString().Substring(0, 500); <h6> ...... </h6>
 
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.Product_Description);
-                                }
-                            </td>
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.Product_Description);
+                            }
+                        </td>
 
-                            <td>
-                                <img src="~/CetagoryPicture/@item.Cetagory_Image" height="100" width="100">
-                                @Html.DisplayFor(modelItem => item.Cetagory_Name)
-                            </td>
+                        <td>
+                            <img src="~/CetagoryPicture/@item.Cetagory_Image" height="100" width="100">
+                            @Html.DisplayFor(modelItem => item.Cetagory_Name)
+                        </td>
 
-                            <td>
-                                <a  href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID" > More Details</a> |
-                                <a  href="~/Advertisement/Edit_Non_Approve_Post/@item.CID/@item.PID" > Edit</a> |
-                                <a  href="~/Advertisement/Delete_Non_Approve_Post/@item.CID/@item.PID"> Delete</a>
-                            </td>
-                        </tr>
+                        <td>
+                            <a href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID"> More Details</a> |
+                            <a href="~/Advertisement/Edit_Non_Approve_Post/@item.CID/@item.PID"> Edit</a> |
+                            <a href="~/Advertisement/Delete_Non_Approve_Post/@item.CID/@item.PID"> Delete</a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+@*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button>*@
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @*Javascript here*@
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>
