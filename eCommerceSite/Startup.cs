@@ -27,8 +27,8 @@ namespace eCommerceSite
         {
             services.AddControllersWithViews();
             services.AddDbContext<DatabaseContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-            options.UseSqlServer(Configuration.GetConnectionString("Mohsin-DevConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+           /// options.UseSqlServer(Configuration.GetConnectionString("Mohsin-DevConnection")));
 
             services.AddAuthentication(options =>
             {

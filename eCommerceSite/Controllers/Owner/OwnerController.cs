@@ -74,7 +74,7 @@ namespace eCommerceSite.Controllers.Owner
                     Cetagory_Image = Cetagory[0].Photo,
                     CID = CID,
                     PID = PID,
-                    JWT_Token = HttpContext.Session.GetString("Token"),
+                    
                 };                                
                 Non_Approve_Advertisement.Add(Non_Approve_Data);
 

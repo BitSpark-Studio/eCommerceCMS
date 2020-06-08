@@ -23,7 +23,7 @@ namespace eCommerceSite.Models.Owner
         public int CID { set; get; }
 
         public int PID { set; get; }
-        public String JWT_Token { set; get; }
+      
 
     }
 }

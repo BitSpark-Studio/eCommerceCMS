@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h1>Non Approve Post</h1>
+<h1>Non Approved Post</h1>
 
 <div class="card mb-4">
     <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
@@ -32,7 +32,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                           
+
                             <td>
                                 @if ((item.Title).ToString().Length > 30)
                                 {
@@ -60,7 +60,8 @@
 
                             </td>
                             <td>
-                                <a asp-action="Approve" asp-route-id="@item.PID"> Approve </a> |  
+                                <button onclick="Approve(@item.PID)"> Approve </button> |
+                                <button onclick="Product(@item.PID)" data-toggle="modal" data-target="#exampleModalCenter"> Details </button>
                             </td>
                         </tr>
                     }
@@ -69,3 +70,85 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <img id="img1" src="" width="100" height="100"> &nbsp; &nbsp;
+                <img id="img2" src="" width="100" height="100"> &nbsp; &nbsp;
+                <img id="img3" src="" width="100" height="100"> &nbsp; &nbsp;
+
+                <br/><br/>
+
+                <h5>Details</h5> 
+                <p id="Details">  </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="~/API_Action/ApprovePost.js"> </script>
+
+
+<script>
+
+    function Product(uri) {
+
+            /* var value = {
+                 id: $("#Delete").val(),
+             };*/
+            //// document.writeln(value.email);
+            $.ajax({
+                url: '/api/ProductDetails/' + uri,
+                //headers: { 'ApiKey': token },
+                headers: { 'ApiKey': 'secret' },
+                type: 'GET',
+                dataType: 'json',
+               /// data: value,
+                success: function (data, textStatus, xhr) {
+
+                    document.getElementById('exampleModalLongTitle').innerHTML = (data.value[0]);
+                    document.getElementById('Details').innerHTML = (data.value[1]);
+                    document.getElementById('img1').src = "/Product/" + data.value[2];
+                    document.getElementById('img2').src = "/Product/" + data.value[3];
+                    document.getElementById('img3').src = "/Product/" + data.value[4];
+                   
+
+                    //// location.reload();
+                    ///dataTable.ajax.reload();
+                },
+                error: function (xhr, textStatus, errorThrown) {
+
+                    swal({
+                        icon: 'error',
+                        title: 'Ooopsss!',
+                        text: 'Something Went Wrong',
+                    });
+
+                }
+            });
+       
+
+
+}
+
+
+</script>
+
