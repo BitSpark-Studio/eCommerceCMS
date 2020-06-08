@@ -24,5 +24,6 @@ namespace eCommerceSite.Models.Advertisement
         public String Product_Title { set; get; }
 
         public String Product_Description { set; get; }
+
     }
 }

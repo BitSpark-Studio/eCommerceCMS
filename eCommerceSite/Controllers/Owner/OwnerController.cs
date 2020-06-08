@@ -71,9 +71,10 @@ namespace eCommerceSite.Controllers.Owner
                     Product_Title = Post[0].Title,
                     Product_Description = Post[0].Details,
                     Cetagory_Name = Cetagory[0].Title,
-                    Cetagory_Image=Cetagory[0].Photo,
+                    Cetagory_Image = Cetagory[0].Photo,
                     CID = CID,
                     PID = PID,
+                    JWT_Token = HttpContext.Session.GetString("Token"),
                 };                                
                 Non_Approve_Advertisement.Add(Non_Approve_Data);
 

@@ -72,7 +72,7 @@
                             <td>
                                 <a href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID"> More Details</a> |
                                 <a href="~/Advertisement/Edit/@item.PID">Edit</a> |
-                                <button onclick="Delete(@item.PID)"> Delete </button>
+                                <button onclick="Delete(@item.PID,@item.JWT_Token)"> Delete </button>
                             </td>
                         </tr>
                     }
@@ -90,7 +90,7 @@
 
     <script>
 
-        function Delete(uri) {
+        function Delete(uri, token) {
 
             swal({
                 title: "Are you sure?",
@@ -107,7 +107,8 @@
                     //// document.writeln(value.email);
                     $.ajax({
                         url: '/api/Owners/DeleteProduct/' + uri,
-                      /////  headers: { 'ApiKey': 'My_Name_Is_001' },
+                        //headers: { 'ApiKey': token },
+                        headers: { 'ApiKey': 'secret' },
                         type: 'DELETE',
                         dataType: 'json',
                         /// data: value,
