@@ -244,6 +244,23 @@ namespace eCommerceSite.Controllers.Admin
             }
         }
 
+        public async Task<IActionResult> NonApprovePost()
+        {
+            var data = await _context.Post.Where(x => x.Approve == "NO")
+           .Select(x => x).ToListAsync();
+
+            return View(data);
+        }
+
+        public async Task<IActionResult> Users()
+        {
+            var data = await _context.Owner
+                .Select(x => new { x.OID, x.First_Name, x.Email, x.Phone })
+                .ToListAsync();
+
+            return View(data);
+        }
+
     }
 }
 

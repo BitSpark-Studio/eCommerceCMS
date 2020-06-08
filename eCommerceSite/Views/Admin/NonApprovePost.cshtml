@@ -1,0 +1,71 @@
+﻿@model IEnumerable<eCommerceSite.Models.Post.Post>
+
+@{
+    ViewData["Title"] = "NonApprovePost";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h1>Non Approve Post</h1>
+
+<div class="card mb-4">
+    <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Details)
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                           
+                            <td>
+                                @if ((item.Title).ToString().Length > 30)
+                                {
+                                    @item.Title.ToString().Substring(0, 30); <h6> ...... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Title);
+                                }
+
+                            </td>
+                            <td>
+                                @if ((item.Details).ToString().Length > 500)
+                                {
+
+                                    @item.Details.ToString().Substring(0, 500); <h6> ..... </h6>
+
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Details);
+                                }
+
+
+                            </td>
+                            <td>
+                                <a asp-action="Approve" asp-route-id="@item.PID"> Approve </a> |  
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

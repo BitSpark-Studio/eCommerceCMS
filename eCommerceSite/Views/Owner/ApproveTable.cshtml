@@ -71,7 +71,6 @@
 
                             <td>
                                 <a href="~/Advertisement/Details_Advertisement/@item.CID/@item.PID"> More Details</a> |
-                                <a href="~/Advertisement/Edit/@item.PID">Edit</a> |
                                 <button onclick="Delete(@item.PID)"> Delete </button>
                             </td>
                         </tr>
@@ -83,12 +82,12 @@
 </div>
 
 
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <script>
+<script>
 
         function Delete(uri) {
 
@@ -107,12 +106,12 @@
                     //// document.writeln(value.email);
                     $.ajax({
                         url: '/api/Owners/DeleteProduct/' + uri,
-                      /////  headers: { 'ApiKey': 'My_Name_Is_001' },
+                     ///   headers: { 'ApiKey': 'PiTech_JWT_TOKEN' },
                         type: 'DELETE',
                         dataType: 'json',
                         /// data: value,
                         success: function (data, textStatus, xhr) {
-                           
+
                             swal({
                                 icon: 'success',
                                 title: 'Deleted',
@@ -133,12 +132,12 @@
                         }
                     });
                 }
-               
+
             });
 
-           
+
         }
-    </script>
+</script>
 
 
 

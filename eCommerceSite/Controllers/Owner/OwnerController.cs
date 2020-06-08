@@ -83,6 +83,45 @@ namespace eCommerceSite.Controllers.Owner
 
         }
 
+        [Route("Owner/ApproveTable")]
+        public async Task<ActionResult> ApproveTable()
+        {
+            int OID = Convert.ToInt32(HttpContext.Session.GetString("OID"));
+            var data = await _context.Cetagorie_Owner_Post.Where((x => x.OID == OID && x.Approve == "YES")).
+                Select(y => new { y.CID, y.PID }).ToListAsync();
+
+            List<Posted_Advertisement_Details_ViewModel> Non_Approve_Advertisement =
+                new List<Posted_Advertisement_Details_ViewModel>();
+
+            for (int i = 0; i < data.Count; i++)
+            {
+                int PID = data[i].PID;
+
+                var Post = await _context.Post.Where(x => x.PID == PID).
+                    Select(y => new { y.Title, y.Details }).ToListAsync();
+
+                int CID = data[i].CID;
+
+                var Cetagory = await _context.Cetagorie.Where(x => x.CID == CID).
+                    Select(y => new { y.Title, y.Photo }).ToListAsync();
+
+                var Non_Approve_Data = new Posted_Advertisement_Details_ViewModel()
+                {
+                    Product_Title = Post[0].Title,
+                    Product_Description = Post[0].Details,
+                    Cetagory_Name = Cetagory[0].Title,
+                    Cetagory_Image = Cetagory[0].Photo,
+                    CID = CID,
+                    PID = PID,
+                };
+                Non_Approve_Advertisement.Add(Non_Approve_Data);
+
+            }
+
+            return View(Non_Approve_Advertisement);
+
+        }
+
 
         [Route("Owner/Post/{cid}")]
         [HttpGet("{cid}")]
