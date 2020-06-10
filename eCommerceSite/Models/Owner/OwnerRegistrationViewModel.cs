@@ -65,6 +65,8 @@ namespace eCommerceSite.Models.Owner
         [Display(Name="Upload Profile Picture")]
         public IFormFile Photo { set; get; }
 
+        public bool Policy { set; get; }
+
        
     }
 }

@@ -31,7 +31,7 @@
                   
                 <div class="dropdown-divider"></div>
                   
-                     <button asp-action="LogOut" asp-controller="Admin" type="submit" class="dropdown-item">Logout</button>
+                     <a  href="~/Admin/LogOut"  class="dropdown-item">Logout</a>
                     
                 </div>
             </li>
@@ -43,14 +43,19 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Actions</div>
-                        <a class="nav-link" asp-controller="Home">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                             Home
                         </a>
 
                         <a class="nav-link" asp-controller="Admin" asp-action="NonApprovePost">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                           Non Approve Post 
+                            Non Approve Post
+                        </a>
+
+                        <a class="nav-link" asp-controller="Admin" asp-action="Users">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Owner List
                         </a>
 
                     </div>

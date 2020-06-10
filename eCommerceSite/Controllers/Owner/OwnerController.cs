@@ -8,6 +8,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using eCommerceSite.Models;
+using eCommerceSite.Models.ApiAuth;
 using eCommerceSite.Models.Cetagory;
 using eCommerceSite.Models.Owner;
 using eCommerceSite.Models.Post;
@@ -36,6 +37,7 @@ namespace eCommerceSite.Controllers.Owner
         }
 
         // GET: Owner
+        [OwnerExpired]
         [Route("Owner/Index")]
         public async Task<ActionResult> Index()
         {
@@ -43,7 +45,7 @@ namespace eCommerceSite.Controllers.Owner
 
             return View(data);
         }
-
+        [OwnerExpired]
         [Route("Owner/NotApproveTable")]
         public async Task<ActionResult> NotApproveTable()
         {
@@ -84,7 +86,9 @@ namespace eCommerceSite.Controllers.Owner
 
         }
 
+        [OwnerExpired]
         [Route("Owner/ApproveTable")]
+
         public async Task<ActionResult> ApproveTable()
         {
             int OID = Convert.ToInt32(HttpContext.Session.GetString("OID"));
@@ -123,7 +127,7 @@ namespace eCommerceSite.Controllers.Owner
 
         }
 
-
+        [OwnerExpired]
         [Route("Owner/Post/{cid}")]
         [HttpGet("{cid}")]
         public async  Task<IActionResult> Post(int cid)
@@ -149,6 +153,7 @@ namespace eCommerceSite.Controllers.Owner
            
             return View(Cetagory_Details);
         }
+        [OwnerExpired]
         [Route("Owner/Post/{cid}")]
         [HttpPost]
         
@@ -230,6 +235,7 @@ namespace eCommerceSite.Controllers.Owner
 
             return View();
         }
+        [OwnerExpired]
         [AcceptVerbs("Get","Post")]
         public async Task<ActionResult> Same_Title_Post(String title)
         {
@@ -241,7 +247,7 @@ namespace eCommerceSite.Controllers.Owner
                 return Json(false);
 
         }
-
+        [OwnerExpired]
         // GET: Owner/Details/5
         [Route("Owner/Details/{CID}")]
         public async Task<ActionResult> Details(int CID)
@@ -277,42 +283,50 @@ namespace eCommerceSite.Controllers.Owner
         
         public async Task<IActionResult> Create(OwnerRegistrationViewModel owner)
         {
+
             if (ModelState.IsValid)
             {
-                String UploadFolder= Path.Combine(_hostingEnvironment.WebRootPath, "ProfilePicture");
-                String UniqueFileName = Guid.NewGuid().ToString() + "_" + owner.Photo.FileName;
-                String FilePath = Path.Combine(UploadFolder, UniqueFileName);
-                owner.Photo.CopyTo(new FileStream(FilePath, FileMode.Create));
-
-
-                Models.Owner.Owner SaveOwner = new Models.Owner.Owner()
+                if (owner.Policy == false)
                 {
-                    First_Name = owner.First_Name,
-                    Last_Name = owner.Last_Name,
-                    Email = owner.Email,
-                    Phone = owner.Phone,
-                    Address = owner.Address,
-                    Password = owner.Password,
-                    JWT_Token = GenerateToken(owner.Email,"Owner"),
-                    Photo = UniqueFileName,
+                    ModelState.AddModelError(string.Empty, "আপনাকে policy agree করতে হবে।");
+                }
+                else
+                {
+                    String UploadFolder = Path.Combine(_hostingEnvironment.WebRootPath, "ProfilePicture");
+                    String UniqueFileName = Guid.NewGuid().ToString() + "_" + owner.Photo.FileName;
+                    String FilePath = Path.Combine(UploadFolder, UniqueFileName);
+                    owner.Photo.CopyTo(new FileStream(FilePath, FileMode.Create));
 
-                };
 
-                _context.Owner.Add(SaveOwner);
-                await _context.SaveChangesAsync();
+                    Models.Owner.Owner SaveOwner = new Models.Owner.Owner()
+                    {
+                        First_Name = owner.First_Name,
+                        Last_Name = owner.Last_Name,
+                        Email = owner.Email,
+                        Phone = owner.Phone,
+                        Address = owner.Address,
+                        Password = owner.Password,
+                        JWT_Token = GenerateToken(owner.Email, "Owner"),
+                        Photo = UniqueFileName,
 
-                ViewBag.Message = "Registration Complete";
+                    };
+
+                    _context.Owner.Add(SaveOwner);
+                    await _context.SaveChangesAsync();
+
+                    ViewBag.Message = "Registration Complete";
+                }
             }
            
             return View(owner);
         }
-
+        
         [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
-
+      
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(OwnerLoginViewModel owner)
@@ -370,6 +384,16 @@ namespace eCommerceSite.Controllers.Owner
             }
             return View(owner);
         }
+        [OwnerExpired]
+        [Route("Owner/LogOut")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync("Owner");
+            await HttpContext.SignOutAsync("Admin");
+            HttpContext.Session.SetString("OID", "");
+            HttpContext.Session.SetString("Token", "");
+            return Redirect("~/Home");
+        }
 
 
         [AcceptVerbs("Get","Post")]
@@ -390,12 +414,14 @@ namespace eCommerceSite.Controllers.Owner
         }
 
         // GET: Owner/Edit/5
+        [OwnerExpired]
         public ActionResult Edit(int id)
         {
             return View();
         }
 
         // POST: Owner/Edit/5
+        [OwnerExpired]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -411,7 +437,7 @@ namespace eCommerceSite.Controllers.Owner
                 return View();
             }
         }
-
+        [OwnerExpired]
         // GET: Owner/Delete/5
         public ActionResult Delete(int id)
         {
@@ -419,6 +445,7 @@ namespace eCommerceSite.Controllers.Owner
         }
 
         // POST: Owner/Delete/5
+        [OwnerExpired]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

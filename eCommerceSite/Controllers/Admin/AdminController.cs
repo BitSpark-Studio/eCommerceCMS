@@ -78,6 +78,13 @@ namespace eCommerceSite.Controllers.Admin
 
             return View(admin);
         }
+        [Route("Admin/LogOut")]
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync("Owner");
+            await HttpContext.SignOutAsync("Admin");
+            return Redirect("~/Home");
+        }
 
         public IActionResult Create_Cetagory()
         {
@@ -255,10 +262,27 @@ namespace eCommerceSite.Controllers.Admin
         public async Task<IActionResult> Users()
         {
             var data = await _context.Owner
-                .Select(x => new { x.OID, x.First_Name, x.Email, x.Phone })
+                .Select(x => new { x.OID, x.First_Name, x.Email, x.Phone,x.Photo })
                 .ToListAsync();
 
-            return View(data);
+            List<Owner_ViewList_Model> owner_ViewLists = new List<Owner_ViewList_Model>();
+
+            for(int i = 0; i < data.Count; i++)
+            {
+                owner_ViewLists.Add(
+                new Owner_ViewList_Model() 
+                { 
+                    OID = data[i].OID, 
+                    Email = data[i].Email,
+                    First_Name = data[i].First_Name, 
+                    Phone = data[i].Phone ,
+                    Photo=data[i].Photo,
+                });
+                    
+            }
+
+
+            return View(owner_ViewLists);
         }
 
     }

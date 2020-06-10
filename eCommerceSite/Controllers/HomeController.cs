@@ -26,7 +26,7 @@ namespace eCommerceSite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var category = await _context.Cetagorie.Select(x => new { x.Title, x.Photo }).ToListAsync();
+            var category = await _context.Cetagorie.Select(x => new { x.CID ,x.Title, x.Photo }).ToListAsync();
             List<HomeCategoryViewModel> HomeCategory = new List<HomeCategoryViewModel>();
             if (category.Count == 0)
             {
@@ -36,6 +36,7 @@ namespace eCommerceSite.Controllers
             {
                 var CategoryList = new HomeCategoryViewModel()
                 {
+                    CID= category[i].CID,
                     Category_Title = category[i].Title,
                     Category_Image = category[i].Photo
                 };

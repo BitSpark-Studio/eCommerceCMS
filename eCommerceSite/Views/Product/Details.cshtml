@@ -1,14 +1,18 @@
-﻿@model IEnumerable<eCommerceSite.Models.Post.Post>
+﻿@model IEnumerable<eCommerceSite.Models.Customer.ProductCetagoryOwner>
 
 @{
-    ViewData["Title"] = "NonApprovePost";
-    Layout = "~/Views/Shared/AdminLayout.cshtml";
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/CustomerLayOut.cshtml";
+    var data = Model.ToList();
 }
 
-<h1>Non Approved Post</h1>
+<h1>@data[0].Cetagory_Title</h1> <br/>
+<img src="~/CetagoryPicture/@data[0].Cetagory_Photo" width="100" height="100">
+
+<br/><br />
 
 <div class="card mb-4">
-    <div class="card-header"><i class="fas fa-table mr-1"></i> Cetagory List </div>
+    <div class="card-header"><i class="fas fa-table mr-1"></i> @data[0].Cetagory_Details </div>
     <div class="card-body">
         <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -16,56 +20,36 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.Title)
+                            @Html.DisplayNameFor(model => model.Product_Title)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Details)
+                            @Html.DisplayNameFor(model => model.Product_Description)
                         </th>
-                        <th>
-                            Actions
-                        </th>
+
+                        <th></th>
                     </tr>
                 </thead>
 
 
                 <tbody>
-                    @foreach (var item in Model)
+                    @for (int i = 1; i < data.Count; i++)
                     {
                         <tr>
-
                             <td>
-                                @if ((item.Title).ToString().Length > 30)
-                                {
-                                    @item.Title.ToString().Substring(0, 30); <h6> ...... </h6>
-
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.Title);
-                                }
-
+                                @Html.DisplayFor(modelItem => data[i].Product_Title)
                             </td>
                             <td>
-                                @if ((item.Details).ToString().Length > 500)
-                                {
-
-                                    @item.Details.ToString().Substring(0, 500); <h6> ..... </h6>
-
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.Details);
-                                }
-
-
+                                @Html.DisplayFor(modelItem => data[i].Product_Description)
                             </td>
+
                             <td>
-                                <button onclick="Approve(@item.PID)"> Approve </button> |
-                                <button onclick="Product(@item.PID)" data-toggle="modal" data-target="#exampleModalCenter"> Details </button>
+                                <button onclick="Product(@data[i].PID)" data-toggle="modal" data-target="#exampleModalCenter"> More Details </button> 
                             </td>
                         </tr>
                     }
                 </tbody>
+                
+
             </table>
         </div>
     </div>
@@ -96,7 +80,7 @@
 
                 <h5>Owner Details</h5>
                 <br />
-                <img id="dp" src="" width="100" height="100"><br /><br/>
+                <img id="dp" src="" width="100" height="100"><br/><br />
 
                 <h6>Name</h6> <p id="Name">  </p>
                 <h6>Phone</h6> <p id="Phone">  </p>
@@ -111,13 +95,6 @@
     </div>
 </div>
 
-
-
-
-<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="~/API_Action/ApprovePost.js"></script>
 <script src="~/API_Action/ProductAndOwnerDetails.js"></script>
 
 
