@@ -16,3 +16,4 @@ Restful API. And Handled AJax and Jquery for 'GET,POST,PUT,DELETE' request in AP
 ![](5.png)
 ![](6.png)
 ![](7.png)
+![](10.png)
