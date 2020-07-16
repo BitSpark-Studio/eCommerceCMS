@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace eCommerceSite
 {
@@ -27,9 +28,9 @@ namespace eCommerceSite
         {
             services.AddControllersWithViews();
             services.AddDbContext<DatabaseContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-           /// options.UseSqlServer(Configuration.GetConnectionString("Mohsin-DevConnection")));
-
+            /// options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            /// options.UseSqlServer(Configuration.GetConnectionString("Mohsin-DevConnection")));
+            options.UseNpgsql(Configuration.GetConnectionString("pgConnection")));
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Owner";
