@@ -28,9 +28,9 @@ namespace eCommerceSite
         {
             services.AddControllersWithViews();
             services.AddDbContext<DatabaseContext>(options =>
-            /// options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
             /// options.UseSqlServer(Configuration.GetConnectionString("Mohsin-DevConnection")));
-            options.UseNpgsql(Configuration.GetConnectionString("pgConnection")));
+            ///options.UseNpgsql(Configuration.GetConnectionString("pgConnection")));
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "Owner";
