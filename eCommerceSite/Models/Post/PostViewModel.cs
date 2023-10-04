@@ -41,7 +41,7 @@ namespace eCommerceSite.Models.Post
         public String Title { set; get; }
 
         [Required]
-        [MaxLength(1000)]
+        //[MaxLength(1000)]
 
         public String Description { set; get; }
     }

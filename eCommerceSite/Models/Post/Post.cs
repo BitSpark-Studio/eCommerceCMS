@@ -18,7 +18,7 @@ namespace eCommerceSite.Models.Post
         public String Title { set; get; }
 
         [MinLength(100, ErrorMessage = "Details Must be at least 100 character long")]
-        [MaxLength(1000, ErrorMessage = "Details Can not exceed 1000 character")]
+        //[MaxLength(1000, ErrorMessage = "Details Can not exceed 1000 character")]
         public String Details { set; get; }
 
         [MaxLength(4)]
